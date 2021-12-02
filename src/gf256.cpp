@@ -200,18 +200,12 @@ static bool gf256_self_test()
 #endif
 
 #if defined(GF256_TRY_NEON)
-# if defined(IOS) && (defined(__ARM_NEON) || defined(__ARM_NEON__))
-// Requires iPhone 5S or newer
+# if defined(__ARM_NEON) || defined(__ARM_NEON__) || defined(__aarch64__)
 static const bool CpuHasNeon = true;
 static const bool CpuHasNeon64 = true;
-# else // ANDROID or LINUX_ARM
-#  if defined(__aarch64__)
-static bool CpuHasNeon = true;      // if AARCH64, then we have NEON for sure...
-static bool CpuHasNeon64 = true;    // And we have ASIMD
-#  else
+# else
 static bool CpuHasNeon = false;     // if not, then we have to check at runtime.
 static bool CpuHasNeon64 = false;   // And we don't have ASIMD
-#  endif
 # endif
 #endif
 
