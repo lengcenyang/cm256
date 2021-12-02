@@ -54,12 +54,14 @@
 // Platform/Architecture
 
 #if defined(__ARM_ARCH) || defined(__ARM_NEON) || defined(__ARM_NEON__)
-    #if !defined IOS
+    #if defined(__linux__)
         #define LINUX_ARM
+    #elif defined(__APPLE__) && defined(__MACH__)
+        #define MACOS_ARM
     #endif
 #endif
 
-#if defined(ANDROID) || defined(IOS) || defined(LINUX_ARM) || defined(__powerpc__) || defined(__s390__)
+#if defined(__ANDROID__) || defined(IOS) || defined(LINUX_ARM) || defined(MACOS_ARM) || defined(__powerpc__) || defined(__s390__)
     #define GF256_TARGET_MOBILE
 #endif // ANDROID
 
