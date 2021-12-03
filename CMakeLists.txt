@@ -9,7 +9,7 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif()
 
-option(MARCH_NATIVE "Use -march=native option" ON)
+option(MARCH_NATIVE "Use -march=native option" OFF)
 
 set(LIB_SOURCE_FILES
     src/cm256.cpp
@@ -32,8 +32,8 @@ else()
 endif()
 
 if(MARCH_NATIVE)
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -mcpu=apple-m1")
-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -mcpu=apple-m1")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -march=native")
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -march=native")
 endif()
 
 add_library(cm256 ${LIB_SOURCE_FILES})
